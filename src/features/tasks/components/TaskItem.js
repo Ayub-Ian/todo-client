@@ -1,7 +1,10 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
+import UpdateTask from './UpdateTask';
 
-const TaskItem = ({ todo, onDeleteTask }) => {
+const TaskItem = ({ todo, onDeleteTask, onUpdateTask }) => {
+
+  const [showModal, setShowModal] = useState(false);
 
   function handleDelete() {
     fetch(`/messages/${todo.id}`, {
@@ -10,6 +13,7 @@ const TaskItem = ({ todo, onDeleteTask }) => {
     onDeleteTask(todo.id)
   }
   return (
+    <>
     <li>      
     <Link to={`/todo/${todo.id}`}>{todo.title}</Link>
     <div className="tw-flex tw-items-center tw-justify-between">
@@ -18,7 +22,7 @@ const TaskItem = ({ todo, onDeleteTask }) => {
         <p className="high">{todo.priority}</p></span>
     </div>
     <div className="actions">
-      <button>
+      <button onClick={() => setShowModal(true)}>
         <span role="img" aria-label="edit">
           ✏️
         </span>
@@ -30,6 +34,13 @@ const TaskItem = ({ todo, onDeleteTask }) => {
       </button>
     </div>
   </li>
+           <UpdateTask
+           todo={todo}
+           showModal={showModal}
+           setShowModal={setShowModal}
+           onUpdateTask={onUpdateTask}
+         />
+         </>
   )
 }
 
