@@ -1,7 +1,14 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-const TaskItem = ({ todo }) => {
+const TaskItem = ({ todo, onDeleteTask }) => {
+
+  function handleDelete() {
+    fetch(`/messages/${todo.id}`, {
+      method: "DELETE"
+    })
+    onDeleteTask(todo.id)
+  }
   return (
     <li>      
     <Link to={`/todo/${todo.id}`}>{todo.title}</Link>
@@ -16,7 +23,7 @@ const TaskItem = ({ todo }) => {
           ✏️
         </span>
       </button>
-      <button>
+      <button onClick={handleDelete}>
         <span role="img" aria-label="delete">
           🗑
         </span>

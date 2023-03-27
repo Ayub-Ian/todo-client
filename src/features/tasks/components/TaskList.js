@@ -1,10 +1,10 @@
 import React from 'react'
 import TaskItem from './TaskItem'
 
-function TaskList({ todos }) {
+function TaskList({ todos, onDeleteTask }) {
     const list = todos.map(todo => {
         return (
-            <TaskItem key={todo.id} todo={todo}/>
+            <TaskItem key={todo.id} todo={todo} onDeleteTask={onDeleteTask}/>
         )
     })
   return (

@@ -17,6 +17,12 @@ function Tasks() {
     setTodos([...todos, newTodo]);
   }
 
+  function handleDeleteTask(id) {
+    // shorten the list of messages
+    const updatedTodos = todos.filter(todo => todo.id !== id)
+    setTodos(updatedTodos)
+  }
+
   return (
     <MainLayout>
       <div className=" tw-mt-8">
@@ -28,7 +34,7 @@ function Tasks() {
       </div>
       <div className="center tw-bg-secondary-dark tw-py-6 tw-px-16 tw-rounded-lg tw-w-2/3">
         <div className="tasks">
-        <TaskList todos={todos} />
+        <TaskList todos={todos} onDeleteTask={handleDeleteTask} />
         </div>
         <button
           type="button"
