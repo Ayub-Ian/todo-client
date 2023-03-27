@@ -9,9 +9,11 @@ function TaskList({ todos }) {
     })
   return (
 
-    <div className='tw-grid tw-grid-cols-3 tw-gap-4'>
-        {list}
-    </div>
+    <div className="list">
+    <ul>
+      {list}
+    </ul>
+  </div>
   )
 }
 

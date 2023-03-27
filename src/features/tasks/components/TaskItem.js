@@ -3,11 +3,26 @@ import { Link } from 'react-router-dom'
 
 const TaskItem = ({ todo }) => {
   return (
-    <div className=' tw-bg-note tw-rounded-lg tw-px-6 tw-py-3'>
-        <Link to={`/todo/${todo.id}`} className=' tw-font-semibold tw-text-lg'>{todo.title}</Link>
-        <span className=' tw-rounded-full tw-bg-pomodoro tw-px-3 tw-text-xs tw-py-0.5 tw-capitalize' >{todo.priority}</span>
-        <p>{todo.description}</p>
+    <li>      
+    <Link to={`/todo/${todo.id}`}>{todo.title}</Link>
+    <div className="tw-flex tw-items-center tw-justify-between">
+    <span className="time">27/07/2007</span>
+     <span className=" tw-text-sm tw-relative tw-flex tw-items-center">
+        <p className="high">{todo.priority}</p></span>
     </div>
+    <div className="actions">
+      <button>
+        <span role="img" aria-label="edit">
+          ✏️
+        </span>
+      </button>
+      <button>
+        <span role="img" aria-label="delete">
+          🗑
+        </span>
+      </button>
+    </div>
+  </li>
   )
 }
 
