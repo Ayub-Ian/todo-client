@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-function UpdateTask({ showModal, setShowModal, onUpdateTask, todo }) {
+function UpdateTask({ showModal, setShowModal, onUpdateTask, todo, token }) {
   const [taskData, setTaskData] = useState({
     title: todo.title,
     description: todo.description,
@@ -23,6 +23,7 @@ function UpdateTask({ showModal, setShowModal, onUpdateTask, todo }) {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
+        'Authorization': `Bearer ${token}`
       },
       body: JSON.stringify(taskData),
     })

@@ -58,7 +58,7 @@
       "title": "Coffee run",
       "description": "Stardusk Coffee",
       "status": "created",
-      "priority": "high",
+      "priority": "medium",
       "user": {
         "id": "89bd9324-04e0-4cd6-aa27-981508bd219f",
         "username": "James",
@@ -190,6 +190,12 @@
       "description": "Go and buy some groceries from the shops",
       "priority": "low",
       "id": "9GCLyEQ"
+    },
+    {
+      "title": "Implement controllers",
+      "description": "Add user controller to project",
+      "priority": "medium",
+      "id": "2Hff0bs"
     }
   ]
 }

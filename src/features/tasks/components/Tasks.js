@@ -1,17 +1,32 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { MainLayout } from "../../../components/layout/MainLayout";
 import CreateTask from "./CreateTask";
 import TaskList from "./TaskList";
 
-function Tasks() {
+function Tasks({ user, onLogout }) {
+
+  const navigate = useNavigate()  
   const [todos, setTodos] = useState([]);
   const [showModal, setShowModal] = useState(false);
+  const token = user.data.token
 
+  
+
+console.log({ user })
   useEffect(() => {
-    fetch("http://localhost:8080/todos")
+    if (!user) {
+        return navigate('/login')
+      }    
+    fetch("/todos", {
+        headers: {
+            'Content-type': 'application/json',
+            'Authorization': `Bearer ${user.data.token}`,
+        }
+    })
       .then((r) => r.json())
-      .then((data) => setTodos(data));
-  }, []);
+      .then((data) => setTodos(data.data));
+  }, [user, navigate]);
 
   function handleAddTask(newTodo) {
     setTodos([...todos, newTodo]);
@@ -34,10 +49,14 @@ function Tasks() {
     setTodos(updatedTodos)
   }
 
+  console.log(todos)
+
+
   return (
-    <MainLayout>
+    <MainLayout user={user} onLogout={onLogout}>
       <div className=" tw-mt-8">
         <CreateTask
+        token={token}
           onAddTask={handleAddTask}
           showModal={showModal}
           setShowModal={setShowModal}
@@ -45,7 +64,7 @@ function Tasks() {
       </div>
       <div className="center tw-bg-secondary-dark tw-py-6 tw-px-16 tw-rounded-lg tw-w-2/3">
         <div className="tasks">
-        <TaskList todos={todos} onDeleteTask={handleDeleteTask} onUpdateTask={handleUpdateTask} />
+        <TaskList todos={todos} onDeleteTask={handleDeleteTask} onUpdateTask={handleUpdateTask} token={token} />
         </div>
         <button
           type="button"

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-function CreateTask({ showModal, setShowModal, onAddTask }) {
+function CreateTask({ showModal, setShowModal, onAddTask, token }) {
   const [taskData, setTaskData] = useState({
     title: "",
     description: "",
@@ -24,16 +24,16 @@ function CreateTask({ showModal, setShowModal, onAddTask }) {
     e.preventDefault();
     console.log(taskData);
 
-    fetch("http://localhost:8080/todos", {
+    fetch("/todos/create", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        'Authorization': `Bearer ${token}`
       },
-      body: JSON.stringify(taskData),
-    })
+      body: JSON.stringify(taskData) })
       .then((r) => r.json())
       .then((data) => {
-        onAddTask(data);
+        onAddTask(data.data);
         resetForm();
         setShowModal(false);
       });
