@@ -1,0 +1,8 @@
+{
+    "rewrites" : [
+        {
+            "source": "/proxy/:match*",
+            "destination": "https://task-rails-urg1.onrender.com/:match*"
+        }
+    ]
+}

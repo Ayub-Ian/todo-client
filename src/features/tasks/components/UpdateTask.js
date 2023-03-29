@@ -19,7 +19,7 @@ function UpdateTask({ showModal, setShowModal, onUpdateTask, todo, token }) {
     e.preventDefault();
     console.log(taskData);
 
-    fetch(`http://localhost:8080/todos/${todo.id}`, {
+    fetch(`/todos/${todo.id}`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
